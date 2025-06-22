@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Expense Tracker{% endblock %}</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <header>
+            <h1 id="Head">Expense Tracker</h1>
+            <hr>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul>
+            {% for category,message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer id="Foot">
+            <p class="foot-p">&copy; 2025 Expense Tracker</p>
+        </footer>
+
+    </div>
+</body>
+</html>

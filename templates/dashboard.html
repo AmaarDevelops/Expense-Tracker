@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ session['user'] }}!</h2>
+
+<h3>Add new Expense</h3>
+<a href="{{ url_for('add_expense') }}">
+    <button type="submit">Add Expense</button>
+</a>
+
+<h3>Your Expenses:</h3>
+<ul>
+    {% for expense in expenses %}
+    <li>${{expense.amount}}  -   {{ expense.category }} : {{expense.description}} 
+      <form method="POST" action="{{ url_for('delete_expense', expense_id=expense.id) }}" style="display:inline;">
+         <button type="submit">Delete</button>
+      </form>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Total : ${{ total }}</h3>
+
+<p> <a href="{{ url_for('logout') }}" >Logout</a></p>
+{% endblock %}
